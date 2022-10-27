@@ -1,0 +1,148 @@
+﻿@model BoostIK.BLL.Models.DTOs.CreateCompanyDTO
+
+@{
+    ViewData["Title"] = "CreateCompany";
+    Layout = "_AdminLayout";
+}
+
+@section Styles {
+
+    <link href="~/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+}
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="page-title">Şirket Ekle</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Anasayfa</a></li>
+                            <li class="breadcrumb-item active">Şirket Ekle</li>
+                        </ol>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div><!--end row-->
+    <!-- end page title end breadcrumb -->
+
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-controller="Admin" asp-action="CreateCompany" method="post" enctype="multipart/form-data" autocomplete="off">
+                        <div class="form-group row">
+                            <div class="col-sm-auto">
+                                <label asp-for="CompanyName">Şirket İsmi</label>
+                                <input type="text" asp-for="CompanyName" class="form-control" utocomplete="off" />
+                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-auto">
+                                <label asp-for="TradeName">Şirket Ünvanı</label><br>
+                                <select asp-for="TradeName" class="custom-select" asp-items=ViewBag.TradeNameTypes style="width: 200px;">
+                            </select>
+                            </div>
+                         </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="MailExtension">Mail Uzantısı</label>
+                            <input type="text" asp-for="MailExtension" class="form-control" utocomplete="off" />
+                            <span asp-validation-for="MailExtension" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="TaxOffice">Vergi Dairesi</label>
+                            <input type="text" asp-for="TaxOffice" class="form-control" utocomplete="off" />
+                            <span asp-validation-for="TaxOffice" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="TaxNumber">Vergi Numarası</label>
+                            <input type="text" asp-for="TaxNumber" class="form-control" utocomplete="off" />
+                            <span asp-validation-for="TaxNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="MersisNumber">Mersis Numarası</label>
+                            <input type="text" asp-for="MersisNumber" class="form-control" utocomplete="off" />
+                            <span asp-validation-for="MersisNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="WebsiteAdress">Web Sitesi Adresi</label>
+                            <input type="text" asp-for="WebsiteAdress" class="form-control" utocomplete="off" />
+                            <span asp-validation-for="WebsiteAdress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="City">Şehir</label><br>
+                            <select asp-for="City" class="custom-select" style="width: 200px;">
+                                @foreach (var item in ViewBag.Cities)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="Adress">Adres</label>
+                            <input type="text" asp-for="Adress" class="form-control" utocomplete="off" />
+                            <span asp-validation-for="Adress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-xl-6 col-md-8 d-flex align-items-center">
+                            <div class="form-group">
+                                <label asp-for="Logo">Şirket Logosu :</label>
+                                <input type="file" class="form-control-file" asp-for="Logo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-launch"></i> Ekle
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts{
+
+    @if (ViewBag.result == true)
+    {
+        <script>
+            toastr.success("Şirket başarılı bir şekilde oluşturulmuştur.");
+            $('#Description').val("");
+        </script>
+    }
+    else if (ViewBag.result == false)
+    {
+        string err = "";
+        foreach (string item in ViewBag.errors)
+        {
+            err = err + $"<li>{item}</li>";
+        }
+        <script type="text/javascript">toastr.warning('<b>Şirket oluşturulumadı !</b> <br>' + '@Html.Raw(err)');</script>
+    }
+}

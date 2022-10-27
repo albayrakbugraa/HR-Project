@@ -1,0 +1,39 @@
+﻿@using BoostIK.BLL.Models.VMs
+@model PersonelCardVM
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="dastyle-profile">
+            <div class="col">
+                <div class="row align-self-center mb-3 mb-4">
+                    <div class="dastyle-profile-main">
+                        <div class="dastyle-profile-main-pic">
+                            <img src="@Model.ImagePath" alt="profile-pic" style="height : 110px; width:110px; object-fit:contain" class="rounded-circle" id="profile-picture">
+                        </div>
+                        <div class="dastyle-profile_user-detail">
+                            <h5 class="dastyle-user-name">@Model.FirstName @Model.LastName</h5>
+                            <span>@Model.DepartmentName.ToUpper()</span>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="row ml-auto align-self-center">
+                    <ul class="list-unstyled personal-detail mb-0" style="width:100%;">
+                        <li class="mt-2"><b> @string.Join(' ', Model.FirstName, Model.SecondName, Model.LastName)</b></li>
+                        <li class="mt-2"><p class="text-muted">@Model.Position</p></li>
+                        <li class="mt-2"><i class="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> Şirket Telefonu :</b> @Model.PhoneNumber</li>
+                        <li class="mt-2"><i class="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> Cep Telefonu :</b> @Model.MobilePhone</li>
+                        <li class="mt-2"><i class="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Şirket Mail :</b> @Model.Email</li>
+                        <li class="mt-2"><i class="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Kişisel Mail :</b> @Model.PersonelMail</li>
+                        <li class="mt-2"><i class="far fa-address-book text-secondary font-22 align-middle mr-2"></i> <b> Adres :</b> @Model.Adress</li>
+                        <li class="mt-4">
+                            <button type="button" class="btn btn-primary waves-effect waves-light btn-block" onclick="GetPersonelInfo()"><i class="mdi mdi-check-all mr-2"></i>Bilgilerimi Düzenle</button>
+                        </li>
+                    </ul>
+
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end f_profile-->
+    </div><!--end card-body-->
+</div> <!--end card-->

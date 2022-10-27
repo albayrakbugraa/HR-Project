@@ -1,0 +1,143 @@
+﻿@using BoostIK.BLL.Models.VMs
+@model RequestDailyVM
+
+
+@section Styles {
+
+<link href="~/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Günlük İzin Talebi</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Günlük İzin Talebi</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Personel" asp-action="GunlukIzinTalebi" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="PermissionID">İZİN TİPİ</label><br>
+                            <select asp-for="PermissionID" class="custom-select" style="width: 200px;">
+                                @foreach (var item in ViewBag.Limits)
+                                {
+                                    <option data-limit="@item.MaxDayCount" value="@item.PermissionID">@item.PermissionName</option>
+                                }
+                            </select>
+                            <span>Kalan yıllık izin hakkınız : <b>@ViewBag.Limits[0].MaxDayCount</b></span>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-auto">
+                            <div class="form-group">
+                                <label>Başlangıç</label>
+                                <div class="input-group">
+                                    <input type="text" id="start-date" class="form-control locale-date-input" value="@DateTime.Today.AddDays(1).ToString("dd-MM-yyyy")">
+                                    <input type="text" asp-for="StartDate" value="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" hidden>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="dripicons-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-auto">
+                            <div class="form-group">
+                                <label>Başlangıç</label>
+                                <div class="input-group">
+                                    <input type="text" id="end-date" class="form-control locale-date-input" value="@DateTime.Today.AddDays(1).ToString("dd-MM-yyyy")">
+                                    <input type="text" asp-for="EndDate" value="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" hidden>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="dripicons-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-3 col-lg-6 col-xl-1">
+                            <label asp-for="DayCount">Gün</label>
+                            <input asp-for="DayCount" type="number" min="1" class="form-control" placeholder="Gün" value="1" readonly>
+                        </div>
+                    </div>
+                    <span asp-validation-for="DayCount" class="text-danger"></span>
+
+                    <div class="row">
+                        <div class="form-group col col-xl-6 col-md-8">
+                            <label asp-for="Description">Açıklama</label>
+                            <textarea asp-for="Description" rows="4" class="form-control" placeholder="Açıklama ..." autocomplete="off"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-xl-6 col-md-8 d-flex align-items-center">
+                            <div class="form-group">
+                                <label asp-for="File">Ek Dosya :</label>
+                                <input type="file" class="form-control-file" asp-for="File">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-launch"></i> İzin Talep Et
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts{
+
+<script src="~/assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+
+@if(ViewBag.result == true)
+    {
+<script>
+    toastr.success("İzin talebiniz alınmış ve yönetici onayına gönderilmiştir.");
+    $('#Description').val("");
+</script>
+}else if(ViewBag.result == false){
+    string err = "";
+    foreach (string item in ViewBag.errors)
+    {
+        err = err + $"<li>{item}</li>";
+    }
+<script type="text/javascript">toastr.warning('<b>İzin oluşturulumadı !</b> <br>' +'@Html.Raw(err)');</script>
+}
+
+<script src="~/js/gunluk-izin.js"></script>
+
+@*<!--Flatpickr-->
+    <script src="~/vendor/flatpickr/flatpickr.min.js"></script>
+    <script src="~/vendor/flatpickr/tr-locale.js"></script>*@
+
+}

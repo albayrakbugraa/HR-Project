@@ -1,0 +1,63 @@
+﻿@using BoostIK.BLL.Models.VMs
+@using BoostIK.CORE.Enums
+@model List<CompanyVM>
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Şirket Listesi</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Şirket Listesi</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0 table-centered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Şirket Logosu</th>
+                                <th class="text-center">Şirket Adı</th>
+                                <th class="text-center">Ünvan</th>
+                                <th class="text-center">Vergi Numarası</th>
+                                <th class="text-center">Şehir</th>
+                                <th class="text-center">Personel Sayısı</th>
+                                <th class="text-center">Yönetici Adı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center" style="width:150px"><img src="@item.LogoPath" alt="profile-user" class="img-thumbnail" /></td>
+                                    <td class="text-center">@item.CompanyName</td>
+                                    <td class="text-center">@item.TradeName</td>
+                                    <td class="text-center">@item.TaxNumber</td>
+                                    <td class="text-center">@item.City</td>
+                                    <td class="text-center">@item.PersonelCount</td>
+                                    <td class="text-center">@item.ManagerName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table><!--end /table-->
+                </div><!--end /tableresponsive-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

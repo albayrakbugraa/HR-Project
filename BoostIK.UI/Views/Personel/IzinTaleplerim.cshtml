@@ -1,0 +1,96 @@
+﻿@using BoostIK.BLL.Models.VMs
+@using BoostIK.CORE.Enums
+@model List<DayOffRequestVM>
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">İzin Taleplerim</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">İzin Taleplerim</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0 table-centered">
+                        <thead>
+                            <tr>
+                                <th>İzin Tipi</th>
+                                <th>Başlangıç</th>
+                                <th>Bitiş</th>
+                                <th>Gün Sayısı</th>
+                                <th>Açıklama</th>
+                                <th class="text-center">Talep Tarihi</th>
+                                <th class="text-center">Durum</th>
+                                <th class="text-center">Yanıt Tarihi</th>
+                                <th class="text-center">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.PermissionName</td>
+                                    @if (item.RestType == RestType.Günlük)
+                                    {
+                                        <td>@item.StartDate.ToString("dd-MM-yyyy")</td>
+                                        <td>@item.EndDate.ToString("dd-MM-yyyy")</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@(((DateTime)item.StartHour).ToString("dd-MM-yyyy HH:mm"))</td>
+                                        <td>@(((DateTime)item.EndHour).ToString("dd-MM-yyyy HH:mm"))</td>
+                                    }
+
+                                    <td>@item.DayCount</td>
+                                    <td>@item.Description</td>
+                                    <td class="text-center">@item.CreationDate.ToString("dd-MM-yyyy")</td>
+                                    @switch (item.State)
+                                    {
+                                        case RequestState.Bekliyor:
+                                            <td  class="text-center"><span class="badge badge-warning">Bekliyor</span></td>
+                                            break;
+                                        case RequestState.Onaylandı:
+                                            <td  class="text-center"><span class="badge badge-success">Onaylandı</span></td>
+                                            break;
+                                        case RequestState.Reddedildi:
+                                            <td  class="text-center"><span class="badge badge-danger">Reddedildi</span></td>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    <td class="text-center">@(item.ReplyDate == null ? "--" : ((DateTime)item.ReplyDate).ToString("dd-MM-yyyy"))</td>
+                                    <td class="text-center">
+                                        @if(item.State == RequestState.Bekliyor)
+                                        {
+                                            <a class="btn btn-sm btn-danger waves-effect waves-light" asp-controller="Personel" asp-action="IzinTalebiIptal" asp-route-izinId="@item.DayOffRequestID">Geri Çek</a>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted">İşlem Yok</p>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table><!--end /table-->
+                </div><!--end /tableresponsive-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

@@ -1,0 +1,199 @@
+﻿@using BoostIK.BLL.Models.VMs
+@using BoostIK.CORE.Enums
+@model ManagerCardVM
+
+@{
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+@section Styles{
+    <link href="~/assets/vendor/lightpick.css" rel="stylesheet" type="text/css" />
+}
+
+
+    <div class="row mt-4">
+        <div class="col-lg-4">
+            <div id="ik-personel-card">
+                <partial name="_ManagerCardPartial" model=@Model></partial>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dash-datepick">
+                        <input type="hidden" id="light_datepick" />
+                    </div>
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div><!--end col-->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item align-items-center d-flex">
+                            <div class="media">
+                                <img src="assets/images/widgets/project1.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="...">
+                                <div class="media-body align-self-center">
+                                    <h5 class="m-0 font-13">Meeting with UI/UX Designers</h5>
+                                    <p class="text-muted mb-0">Today 07:30 AM</p>
+                                </div><!--end media body-->
+                            </div>
+                        </li>
+                        <li class="list-group-item align-items-center ">
+                            <div class="media">
+                                <img src="assets/images/users/user-5.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="...">
+                                <div class="media-body align-self-center">
+                                    <h5 class="m-0 font-13">Lunch with my friend</h5>
+                                    <p class="text-muted mb-0">Today 12:30 PM</p>
+                                </div><!--end media body-->
+                            </div>
+                        </li>
+                        <li class="list-group-item align-items-center">
+                            <div class="media">
+                                <img src="assets/images/widgets/project3.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="...">
+                                <div class="media-body align-self-center">
+                                    <h5 class="m-0 font-13">Call for payment Project ID : #254136</h5>
+                                    <p class="text-muted mb-0">Tomorrow 10:30 AM</p>
+                                </div><!--end media body-->
+                            </div>
+                        </li>
+                        <li class="list-group-item align-items-center ">
+                            <div class="media">
+                                <img src="assets/images/users/user-4.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="...">
+                                <div class="media-body align-self-center">
+                                    <h5 class="m-0 font-13">Picnic with my Family</h5>
+                                    <p class="text-muted mb-0">01 June 2019 - 09:30 AM</p>
+                                </div><!--end media body-->
+                            </div>
+                        </li>
+                        <li class="list-group-item align-items-center">
+                            <div class="media">
+                                <img src="assets/images/widgets/project4.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="...">
+                                <div class="media-body align-self-center">
+                                    <h5 class="m-0 font-13">Meeting with Developers</h5>
+                                    <p class="text-muted mb-0">04 June 2019 - 07:30 AM</p>
+                                </div><!--end media body-->
+                            </div>
+                        </li>
+                    </ul>
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal-edit-profile" tabindex="-1" role="dialog" aria-labelledby="modal-edit-profile1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h6 class="modal-title m-0 text-white">Bilgi Güncelle</h6>
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="la la-times text-white"></i></span>
+                    </button>
+                </div><!--end modal-header-->
+                <div class="modal-body">
+                    <form id="userEditForm">
+                        <div class="form-group">
+                            <label>Profil Resmi Seç</label><br />
+
+                            <div class="dastyle-profile-main-pic">
+                                <img src="images/account-add-photo.svg" alt="profile-pic" height="80" width="80" class="rounded-circle" style="object-fit:contain;" id="output">
+                                <input type="file" accept="image/*" class="btn btn-dark ml-4" id="newPhoto" value="Fotoğraf Değiştir" onchange="loadFile(event)" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc2">Adres</label>
+                            <textarea id="adress" rows="4" class="form-control"
+                                  placeholder="Adres ..."></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="city">Şehir</label><br>
+                                    <select id="city" class="custom-select">
+                                    @foreach (var enumValue in Enum.GetValues(typeof(City)))
+                                    {
+                                        <option value="@((int)enumValue)">@enumValue</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="postCode">Posta Kodu</label>
+                                <input class="form-control" type="text" id="postCode" placeholder="Posta Kodu">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="mobilePhone">Cep Telefonu</label>
+                                <input id="mobilePhone" type="text" class="form-control" placeholder="(000) 000-0000" data-mask="(000) 000-0000" maxlength="16">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="phoneNumber">Şirket Telefon</label>
+                                <input id="phoneNumber" type="text" class="form-control" placeholder="(000) 000-0000" data-mask="(000) 000-0000" maxlength="16">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <label for="emergencyPerson">Acil Durum Kişisi:</label>
+                            <input class="form-control" type="text" id="emergencyPerson" placeholder="İsim Soyisim">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="emergencyPersonPhone">Acil Telefon</label>
+                                <input id="emergencyPersonPhone" type="text" class="form-control" placeholder="(000) 000-0000" data-mask="(000) 000-0000" maxlength="14">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <label for="personelMail">Kişisel Mail:</label>
+                            <input class="form-control" type="email" id="personelMail" placeholder="Kişisel mail adresi">
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label for="bloodGroup">Kan Grubu</label><br>
+                                <select id="bloodGroup" class="custom-select">
+                                    <option value="1">ARh+</option>
+                                    <option value="2">ARh-</option>
+                                    <option value="3">BRh+</option>
+                                    <option value="4">BRh-</option>
+                                    <option value="5">0Rh+</option>
+                                    <option value="6">0Rh-</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div><!--end modal-body-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-dark btn-sm" onclick="UpdateMyInfo();"><i class="fas fa-check"></i> Güncelle</button>
+            </div><!--end modal-footer-->
+        </div><!--end modal-content-->
+    </div><!--end modal-dialog-->
+</div><!--end modal-->
+@section Scripts{
+    <script src="~/js/manager-page.js"></script>
+    <script src="~/assets/vendor/lightpick.js"></script>
+    <script>
+        new Lightpick({
+            field: document.getElementById('light_datepick'),
+            inline: true,
+        });
+
+    </script>
+}

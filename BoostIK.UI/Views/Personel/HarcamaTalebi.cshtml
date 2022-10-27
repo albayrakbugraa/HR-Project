@@ -1,0 +1,143 @@
+﻿@using BoostIK.BLL.Models.VMs
+@model SpendingVM
+
+
+@section Styles {
+
+<link href="~/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Harcama Talebi</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Harcama Talebi</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Personel" asp-action="HarcamaTalebi" method="post" enctype="multipart/form-data" autocomplete="off">
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group" style="max-width: 300px;">
+                                <label>Tarih</label>
+                                <div class="input-group">
+                                    <input type="text" id="spending-date" class="form-control locale-date-input" value="@DateTime.Now.ToString("dd-MM-yyyy")">
+                                    <input type="text" asp-for="SpendingDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" hidden>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="dripicons-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="SpendingDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group" style="max-width: 300px;">
+                                <label asp-for="TypeOfSpending">HARCAMA TİPİ</label><br>
+                                <select asp-for="TypeOfSpending" class="custom-select">
+                                    @foreach (var item in ViewBag.TypeOfSpendings)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group" style="max-width: 300px;">
+                                <label asp-for="Amount">Toplam Tutar</label>
+                                <input type="number" asp-for="Amount" class="form-control" placeholder="Toplam Tutar" autocomplete="off" />
+                                <span asp-validation-for="Amount" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group" style="max-width: 300px;">
+                                <label asp-for="CurrencyUnit">PARA BİRİMİ</label><br>
+                                <select asp-for="CurrencyUnit" class="custom-select">
+                                    @foreach (var item in ViewBag.CurrencyUnits)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-12 col-xl-6">
+                            <label asp-for="Description">Açıklama</label>
+                            <textarea asp-for="Description" rows="4" class="form-control" placeholder="Açıklama ..." autocomplete="off"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-xl-6 col-md-8 d-flex align-items-center">
+                            <div class="form-group">
+                                <label asp-for="File">Ek Dosya :</label>
+                                <input type="file" class="form-control-file" asp-for="File">
+                                @*<span class="text-danger field-validation-valid" data-valmsg-for="File" data-valmsg-replace="true"></span>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-launch"></i> Harcama Talep Et
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts{
+
+<script src="~/assets/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="~/js/harcama.js"></script>
+
+    @if (ViewBag.result == true)
+    {
+<script>
+    toastr.success("Harcama talebiniz alınmış ve yönetici onayına gönderilmiştir.");
+    $('#Description').val("");
+</script>
+    }
+    else if (ViewBag.result == false)
+    {
+        string err = "";
+        foreach (string item in ViewBag.errors)
+        {
+            err = err + $"<li>{item}</li>";
+        }
+<script type="text/javascript">toastr.warning('<b>Harcama oluşturulumadı !</b> <br>' + '@Html.Raw(err)');</script>
+    }
+
+}

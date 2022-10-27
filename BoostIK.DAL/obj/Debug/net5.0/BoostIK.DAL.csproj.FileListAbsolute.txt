@@ -1,0 +1,15 @@
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\bin\Debug\net5.0\BoostIK.DAL.deps.json
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\bin\Debug\net5.0\BoostIK.DAL.dll
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\bin\Debug\net5.0\BoostIK.DAL.pdb
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\bin\Debug\net5.0\BoostIK.CORE.dll
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\bin\Debug\net5.0\BoostIK.CORE.pdb
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.csproj.AssemblyReference.cache
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.AssemblyInfoInputs.cache
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.AssemblyInfo.cs
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.csproj.CoreCompileInputs.cache
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.csproj.CopyComplete
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.dll
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\refint\BoostIK.DAL.dll
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\BoostIK.DAL.pdb
+C:\Users\BUGRA\Desktop\IKProje\IKProject\BoostIK.DAL\obj\Debug\net5.0\ref\BoostIK.DAL.dll

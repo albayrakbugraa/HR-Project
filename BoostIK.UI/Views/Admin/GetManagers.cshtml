@@ -1,0 +1,61 @@
+﻿@using BoostIK.BLL.Models.VMs
+@using BoostIK.CORE.Enums
+@model List<ManagerVM>
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Yönetici Listesi</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Yönetici Listesi</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0 table-centered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Resim</th>
+                                <th class="text-center">İsim</th>
+                                <th class="text-center">Soyisim</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Cinsiyet</th>
+                                <th class="text-center">Şirket</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center"><img src="@item.ImagePath" alt="profile-user" class="img-thumbnail" /></td>
+                                    <td class="text-center">@item.FirstName</td>
+                                    <td class="text-center">@item.LastName</td>
+                                    <td class="text-center">@item.Email</td>
+                                    <td class="text-center">@item.Gender</td>
+                                    <td class="text-center">@item.CompanyName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table><!--end /table-->
+                </div><!--end /tableresponsive-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

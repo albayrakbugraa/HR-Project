@@ -1,0 +1,187 @@
+﻿@using BoostIK.BLL.Models.VMs
+@model RequestHourlyVM
+
+@section Styles {
+<link href="~/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Saatlik İzin Talebi</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Saatlik İzin Talebi</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label>İzin Tipi:</label>
+                        <input type="text" id="izintipi" value="Saatlik İzin" class="form-control" disabled>
+                    </div>
+                </div>
+                <form asp-controller="Personel" asp-action="SaatlikIzinTalebi" method="post">
+                    <div class="row">
+                        <div class="col-sm-auto">
+                            <div class="form-group">
+                                <label>İzin Tarihi</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control locale-date-input" value="@DateTime.Today.AddDays(1).ToString("dd-MM-yyyy")">
+                                    <input type="text" asp-for="StartDate" value="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" hidden>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="dripicons-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-auto">
+                            <div class="form-group">
+                                <label asp-for="StartHour">Başlangıç</label><br>
+                                <select asp-for="StartHour" class="form-control" style="width:150px" onchange="test()">
+                                    <option data-time="8" value="08:00">08:00</option>
+                                    <option data-time="9" value="09:00">09:00</option>
+                                    <option data-time="10" value="10:00">10:00</option>
+                                    <option data-time="11" value="11:00">11:00</option>
+                                    <option data-time="12" value="12:00">12:00</option>
+                                    <option data-time="13" value="13:00">13:00</option>
+                                    <option data-time="14" value="14:00">14:00</option>
+                                    <option data-time="15" value="15:00">15:00</option>
+                                    <option data-time="16" value="16:00">16:00</option>
+                                    <option data-time="17" value="17:00">17:00</option>
+                                    <option data-time="18" value="18:00">18:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-auto">
+                            <div class="form-group">
+                                <label asp-for="EndHour">Bitiş</label><br>
+                                <select asp-for="EndHour" class="form-control" style="width:150px">
+                                    <option data-time="8" value="08:00">08:00</option>
+                                    <option data-time="9" value="09:00">09:00</option>
+                                    <option data-time="10" value="10:00">10:00</option>
+                                    <option data-time="11" value="11:00">11:00</option>
+                                    <option data-time="12" value="12:00">12:00</option>
+                                    <option data-time="13" value="13:00">13:00</option>
+                                    <option data-time="14" value="14:00">14:00</option>
+                                    <option data-time="15" value="15:00">15:00</option>
+                                    <option data-time="16" value="16:00">16:00</option>
+                                    <option data-time="17" value="17:00">17:00</option>
+                                    <option data-time="18" value="18:00">18:00</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-xl-6 col-md-8">
+                            <div class="form-group">
+                                <label asp-for="Description">Açıklama</label>
+                                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Açıklama ..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check"></i> İzin Talep Et
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<partial name="_ValidationScriptsPartial" />*@
+
+
+@section Scripts{
+    @if(ViewBag.result == true)
+    {
+    <script>
+        toastr.success("İzin talebiniz alınmış ve yönetici onayına gönderilmiştir.");
+        $('#Description').val("");
+        document.getElementById('StartHour').getElementsByTagName('option')[0].selected = 'selected'
+        document.getElementById('EndHour').getElementsByTagName('option')[0].selected = 'selected'
+    </script>
+    }else if(ViewBag.result == false){
+        string err = "";
+        foreach (string item in ViewBag.errors)
+        {
+            err = err + $"<li>{item}</li>";
+        }
+        <script type="text/javascript">toastr.warning('<b>İzin oluşturulumadı !</b> <br>' +'@Html.Raw(err)');</script>
+    }
+
+
+<script src="~/assets/vendor/daterangepicker/daterangepicker.js"></script>
+<script>
+
+    function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+}
+    $('input.locale-date-input').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'), 10),
+        "locale": {
+            "format": "DD-MM-YYYY",
+            "separator": " - ",
+            "applyLabel": "Uygula",
+            "cancelLabel": "Vazgeç",
+            "fromLabel": "Dan",
+            "toLabel": "a",
+            "customRangeLabel": "Seç",
+            "daysOfWeek": [
+                "Pt",
+                "Sl",
+                "Çr",
+                "Pr",
+                "Cm",
+                "Ct",
+                "Pz"
+            ],
+            "monthNames": [
+                "Ocak",
+                "Şubat",
+                "Mart",
+                "Nisan",
+                "Mayıs",
+                "Haziran",
+                "Temmuz",
+                "Ağustos",
+                "Eylül",
+                "Ekim",
+                "Kasım",
+                "Aralık"
+            ],
+            "firstDay": 0
+        },
+        minDate: addDays(new Date(), 1)
+        }).on('apply.daterangepicker', function (e, picker) {
+            var startDate = picker.startDate.format('YYYY-MM-DD');
+            $('input[name="StartDate"]').val(startDate)
+            console.log(startDate);
+        });
+</script>
+
+}

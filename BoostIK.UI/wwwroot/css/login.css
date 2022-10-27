@@ -1,0 +1,15 @@
+﻿
+#login-validation-msg {
+    background-color: #fee6eb;
+    color: #f5325c;
+    border-radius: 4px;
+}
+
+#login-validation-msg ul{
+    padding : 0;
+}
+
+
+#login-validation-msg ul li{
+    padding : 8px;
+}

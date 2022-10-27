@@ -1,0 +1,87 @@
+﻿@using BoostIK.BLL.Models.VMs
+@using BoostIK.CORE.Enums
+@model List<SpendingVM>
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Harcama Taleplerim</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Harcama Taleplerim</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0 table-centered">
+                        <thead>
+                            <tr>
+                                <th>Harcama Tipi</th>
+                                <th>Para Birimi</th>
+                                <th>Toplam Tutar</th>
+                                <th>Tarih</th>
+                                <th>Açıklama</th>
+                                <th class="text-center">Talep Tarihi</th>
+                                <th class="text-center">Durum</th>
+                                <th class="text-center">Yanıt Tarihi</th>
+                                <th class="text-center">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.TypeOfSpending</td>
+                                    <td>@item.CurrencyUnit</td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.SpendingDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.Description</td>
+                                    <td class="text-center">@item.CreationDate.ToString("dd-MM-yyyy")</td>
+                                    @switch (item.State)
+                                    {
+                                        case RequestState.Bekliyor:
+                                            <td class="text-center"><span class="badge badge-warning">Bekliyor</span></td>
+                                            break;
+                                        case RequestState.Onaylandı:
+                                            <td class="text-center"><span class="badge badge-success">Onaylandı</span></td>
+                                            break;
+                                        case RequestState.Reddedildi:
+                                            <td class="text-center"><span class="badge badge-danger">Reddedildi</span></td>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    <td class="text-center">@(item.ReplyDate == null ? "--" : ((DateTime)item.ReplyDate).ToString("dd-MM-yyyy"))</td>
+                                    <td class="text-center">
+                                        @if (item.State == RequestState.Bekliyor)
+                                        {
+                                            <a class="btn btn-sm btn-danger waves-effect waves-light" asp-controller="Personel" asp-action="HarcamaTalebiIptal" asp-route-harcamaId="@item.SpendingID">Geri Çek</a>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted">İşlem Yok</p>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table><!--end /table-->
+                </div><!--end /tableresponsive-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

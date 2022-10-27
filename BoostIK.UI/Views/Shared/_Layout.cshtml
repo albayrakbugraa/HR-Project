@@ -1,0 +1,257 @@
+﻿
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>@ViewData["Title"]</title>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome -->
+    @*<link href="~/assets/css/font-awesome-all-min.css" rel="stylesheet" type="text/css" />*@
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+
+
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+
+
+    <!-- ToastR Alerts-->
+    <link type="text/css" href="~/assets/vendor/toastr.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body class="dark-sidenav">
+    <!-- Left Sidenav -->
+    <div class="left-sidenav">
+        <!-- LOGO -->
+        <div class="brand">
+            <a href="#" class="logo">
+                <span>
+                    <img src="~/logo.svg" alt="logo-small" class="logo-sm">
+                </span>
+                <span>
+                    <img src="~/assets/images/logo.png" alt="logo-large" class="logo-lg logo-light" style="height:36px !important">
+                    @*<img src="assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark">*@
+                </span>
+            </a>
+        </div>
+        <!--end logo-->
+        <div class="menu-content h-100" data-simplebar>
+            <ul class="metismenu left-sidenav-menu">
+                <li class="menu-label mt-0">Main</li>
+                <li>
+                    <a asp-controller="Personel" asp-action="Index"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Anasayfa</span></a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Talep Oluştur</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="GunlukIzinTalebi"><i class="ti-control-record"></i>Günlük İzin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="SaatlikIzinTalebi"><i class="ti-control-record"></i>Saatlik İzin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="AvansTalebi"><i class="ti-control-record"></i>Avans Talebi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="HarcamaTalebi"><i class="ti-control-record"></i>Harcama Talebi</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);"><i data-feather="crosshair" class="align-self-center menu-icon"></i><span>Taleplerim</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="IzinTaleplerim"><i class="ti-control-record"></i>İzinlerim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="AvansTaleplerim"><i class="ti-control-record"></i>Avanslarım</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Personel" asp-action="HarcamaTaleplerim"><i class="ti-control-record"></i>Harcamalarım</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <hr class="hr-dashed hr-menu"/>
+                <li>
+                    <a href="#"><i class="fas fa-users" style="color: #7081b9 !important"></i><span>Çalışma Arkadaşlarım</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end left-sidenav-->
+
+    <div class="page-wrapper">
+        <!-- Top Bar Start -->
+        <div class="topbar">
+            <!-- Navbar -->
+            <nav class="navbar-custom">
+                <ul class="list-unstyled topbar-nav float-right mb-0">
+
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <i data-feather="bell" class="align-self-center topbar-icon"></i>
+                            <span class="badge badge-danger badge-pill noti-icon-badge">2</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-lg pt-0">
+
+                            <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
+                                Notifications <span class="badge badge-primary badge-pill">2</span>
+                            </h6>
+                            <div class="notification-menu" data-simplebar>
+                                <!-- item-->
+                                <a href="#" class="dropdown-item py-3">
+                                    <small class="float-right text-muted pl-2">2 min ago</small>
+                                    <div class="media">
+                                        <div class="avatar-md bg-soft-primary">
+                                            <i data-feather="shopping-cart" class="align-self-center icon-xs"></i>
+                                        </div>
+                                        <div class="media-body align-self-center ml-2 text-truncate">
+                                            <h6 class="my-0 font-weight-normal text-dark">Your order is placed</h6>
+                                            <small class="text-muted mb-0">Dummy text of the printing and industry.</small>
+                                        </div><!--end media-body-->
+                                    </div><!--end media-->
+                                </a><!--end-item-->
+                                <!-- item-->
+                                <a href="#" class="dropdown-item py-3">
+                                    <small class="float-right text-muted pl-2">10 min ago</small>
+                                    <div class="media">
+                                        <div class="avatar-md bg-soft-primary">
+                                            <img src="assets/images/users/user-4.jpg" alt="" class="thumb-sm rounded-circle">
+                                        </div>
+                                        <div class="media-body align-self-center ml-2 text-truncate">
+                                            <h6 class="my-0 font-weight-normal text-dark">Meeting with designers</h6>
+                                            <small class="text-muted mb-0">It is a long established fact that a reader.</small>
+                                        </div><!--end media-body-->
+                                    </div><!--end media-->
+                                </a><!--end-item-->
+                                <!-- item-->
+                                <a href="#" class="dropdown-item py-3">
+                                    <small class="float-right text-muted pl-2">40 min ago</small>
+                                    <div class="media">
+                                        <div class="avatar-md bg-soft-primary">
+                                            <i data-feather="users" class="align-self-center icon-xs"></i>
+                                        </div>
+                                        <div class="media-body align-self-center ml-2 text-truncate">
+                                            <h6 class="my-0 font-weight-normal text-dark">UX 3 Task complete.</h6>
+                                            <small class="text-muted mb-0">Dummy text of the printing.</small>
+                                        </div><!--end media-body-->
+                                    </div><!--end media-->
+                                </a><!--end-item-->
+                                <!-- item-->
+                                <a href="#" class="dropdown-item py-3">
+                                    <small class="float-right text-muted pl-2">1 hr ago</small>
+                                    <div class="media">
+                                        <div class="avatar-md bg-soft-primary">
+                                            <img src="assets/images/users/user-5.jpg" alt="" class="thumb-sm rounded-circle">
+                                        </div>
+                                        <div class="media-body align-self-center ml-2 text-truncate">
+                                            <h6 class="my-0 font-weight-normal text-dark">Your order is placed</h6>
+                                            <small class="text-muted mb-0">It is a long established fact that a reader.</small>
+                                        </div><!--end media-body-->
+                                    </div><!--end media-->
+                                </a><!--end-item-->
+                                <!-- item-->
+                                <a href="#" class="dropdown-item py-3">
+                                    <small class="float-right text-muted pl-2">2 hrs ago</small>
+                                    <div class="media">
+                                        <div class="avatar-md bg-soft-primary">
+                                            <i data-feather="check-circle" class="align-self-center icon-xs"></i>
+                                        </div>
+                                        <div class="media-body align-self-center ml-2 text-truncate">
+                                            <h6 class="my-0 font-weight-normal text-dark">Payment Successfull</h6>
+                                            <small class="text-muted mb-0">Dummy text of the printing.</small>
+                                        </div><!--end media-body-->
+                                    </div><!--end media-->
+                                </a><!--end-item-->
+                            </div>
+                            <!-- All-->
+                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary">
+                                View all <i class="fi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <span class="ml-1 nav-user-name hidden-sm">@User.Claims.First(z => z.Type == "firstName").Value</span>
+                            <img src="@User.Claims.First(z => z.Type == "photoPath").Value" alt="profile-user" class="rounded-circle" />
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" asp-controller="Personel" asp-action="Index"><i data-feather="user" class="align-self-center icon-xs icon-dual mr-1"></i> Hesabım</a>
+                            <a class="dropdown-item" href="#"><i data-feather="settings" class="align-self-center icon-xs icon-dual mr-1"></i> Ayarlar</a>
+                            <div class="dropdown-divider mb-0"></div>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="LogOut"><i data-feather="power" class="align-self-center icon-xs icon-dual mr-1"></i> Çıkış</a>
+                        </div>
+                    </li>
+                </ul><!--end topbar-nav-->
+
+                <ul class="list-unstyled topbar-nav mb-0">
+                    <li>
+                        <button class="nav-link button-menu-mobile">
+                            <i data-feather="menu" class="align-self-center topbar-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <!-- end navbar-->
+        </div> <!-- Top Bar End -->
+        <!-- Page Content-->
+        <div class="page-content">
+
+            <!-- Main Container -->
+            <div class="container-fluid">
+                @RenderBody()
+            </div> <!-- Main Container END -->
+
+            <footer class="footer text-center text-sm-left">
+                &copy; 2020 Dastyle <span class="d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes</span>
+            </footer><!--end footer-->
+        </div>
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+    <!-- jQuery  -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/metismenu.min.js"></script>
+    <script src="~/assets/js/waves.js"></script>
+    <script src="~/assets/js/feather.min.js"></script>
+    <script src="~/assets/js/simplebar.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/moment.js"></script>
+
+
+    <!-- App js -->
+    <script src="~/assets/js/app.js"></script>
+
+
+    <!-- Toastr -->
+    <script src="~/assets/vendor/toastr.min.js"></script>
+    <script src="~/assets/js/toastr.js"></script>
+
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

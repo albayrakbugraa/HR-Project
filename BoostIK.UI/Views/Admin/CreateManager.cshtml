@@ -1,0 +1,129 @@
+﻿@model CreateManagerDTO
+
+@{
+    ViewData["Title"] = "Şirket Yöneticisi Oluştur";
+    Layout = "_AdminLayout";
+}
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title">Şirket Yöneticisi Ekle</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Şirket Yöneticisi Ekle</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Admin" asp-action="CreateManager" method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-4 col-md-4 col-xl-3">
+                            <div class="form-group">
+                                <label asp-for="FirstName">Adı : </label>
+                                <input type="text" asp-for="FirstName" class="form-control" placeholder="İsim" autocomplete="off" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 col-md-4 col-xl-3">
+                            <div class="form-group">
+                                <label asp-for="SecondName">İkinci Adı : </label>
+                                <input type="text" asp-for="SecondName" class="form-control" placeholder="İkinci İsim" autocomplete="off" />
+                                <span asp-validation-for="SecondName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 col-md-4 col-xl-3">
+                            <div class="form-group">
+                                <label asp-for="LastName">Soyadı : </label>
+                                <input type="text" asp-for="LastName" class="form-control" placeholder="Soyad" autocomplete="off" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group">
+                                <label asp-for="Position">Pozisyon : </label>
+                                <input type="text" asp-for="Position" class="form-control" placeholder="Pozisyon" autocomplete="off" readonly value="Şirket Yöneticisi" />
+                                <span asp-validation-for="Position" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group">
+                                <label asp-for="Gender">Cinsiyet</label><br>
+                                <select asp-for="Gender" class="custom-select">
+                                    <option value="1">Kadın</option>
+                                    <option value="2">Erkek</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8 col-xl-6">
+                            <div class="form-group">
+                                <label asp-for="CompanyID">Şirket Seçin :</label><br>
+                                <select asp-for="CompanyID" class="custom-select">
+                                    @foreach (CompanyVM item in ViewBag.companies)
+                                    {
+                                        <option value="@item.CompanyID">@item.CompanyName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="mdi mdi-launch"></i> Yönetici Ekle
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts{
+
+    @if (ViewBag.result == true)
+    {
+<script>
+    toastr.success("Şirket başarılı bir şekilde oluşturulmuştur.");
+    $('#Description').val("");
+</script>
+    }
+    else if (ViewBag.result == false)
+    {
+        string err = "";
+        foreach (string item in ViewBag.errors)
+        {
+            err = err + $"<li>{item}</li>";
+        }
+<script type="text/javascript">toastr.warning('<b>İşlem Başarısız !</b> <br>' + '@Html.Raw(err)');</script>
+    }
+}

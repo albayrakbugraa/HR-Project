@@ -1,0 +1,13 @@
+﻿
+
+
+.icon-primary{
+    color : #7081b9;
+}
+
+
+@media screen and (max-width: 992px) {
+    .page-wrapper .page-content {
+        padding : 0;
+    }
+}

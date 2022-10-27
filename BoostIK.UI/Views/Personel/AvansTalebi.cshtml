@@ -1,0 +1,96 @@
+﻿@using BoostIK.BLL.Models.VMs
+@model PaymentVM
+
+
+@section Styles {
+
+    <link href="~/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+}
+
+    <!-- Page-Title -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="page-title">Avans Talebi</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-action="Index">Anasayfa</a></li>
+                            <li class="breadcrumb-item active">Avans Talebi</li>
+                        </ol>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div><!--end row-->
+    <!-- end page title end breadcrumb -->
+
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-controller="Personel" asp-action="AvansTalebi" method="post" enctype="multipart/form-data" autocomplete="off">                        
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="CurrencyUnit">PARA BİRİMİ</label><br>
+                            <select asp-for="CurrencyUnit" class="custom-select" style="width: 200px;">
+                                @foreach (var item in ViewBag.CurrencyUnits)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-auto">
+                            <label asp-for="Amount">Toplam Tutar</label>
+                            <input type="number" asp-for="Amount" class="form-control" placeholder="Toplam Tutar" autocomplete="off"/>
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col col-xl-6 col-md-8">
+                            <label asp-for="Description">Açıklama</label>
+                            <textarea asp-for="Description" rows="4" class="form-control" placeholder="Açıklama ..." autocomplete="off"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>                    
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-launch"></i> Avans Talep Et
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts{
+
+    @if (ViewBag.result == true)
+    {
+        <script>
+            toastr.success("Avans talebiniz alınmış ve yönetici onayına gönderilmiştir.");
+            $('#Description').val("");
+        </script>
+    }
+    else if (ViewBag.result == false)
+    {
+        string err = "";
+        foreach (string item in ViewBag.errors)
+        {
+            err = err + $"<li>{item}</li>";
+        }
+        <script type="text/javascript">toastr.warning('<b>Avans talebi oluşturulumadı !</b> <br>' + '@Html.Raw(err)');</script>
+    }
+
+}

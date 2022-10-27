@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoostIK.UI", "BoostIK.UI\BoostIK.UI.csproj", "{E98458C8-E218-4D95-AD75-014C1C3403E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoostIK.DAL", "BoostIK.DAL\BoostIK.DAL.csproj", "{4E28B1D7-D761-4B69-9D46-0808899AEF7A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoostIK.BLL", "BoostIK.BLL\BoostIK.BLL.csproj", "{A8ECA370-12B2-41B8-816F-5469A03E7A9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoostIK.CORE", "BoostIK.CORE\BoostIK.CORE.csproj", "{EF547FA6-13EB-4234-A88A-C550CD0A7A7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoostIK.API", "BoostIK.API\BoostIK.API.csproj", "{DA031CCD-5BE1-47BF-AA48-4A2EDCCB5F6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E98458C8-E218-4D95-AD75-014C1C3403E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E98458C8-E218-4D95-AD75-014C1C3403E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E98458C8-E218-4D95-AD75-014C1C3403E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E98458C8-E218-4D95-AD75-014C1C3403E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E28B1D7-D761-4B69-9D46-0808899AEF7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E28B1D7-D761-4B69-9D46-0808899AEF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E28B1D7-D761-4B69-9D46-0808899AEF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E28B1D7-D761-4B69-9D46-0808899AEF7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8ECA370-12B2-41B8-816F-5469A03E7A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8ECA370-12B2-41B8-816F-5469A03E7A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8ECA370-12B2-41B8-816F-5469A03E7A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8ECA370-12B2-41B8-816F-5469A03E7A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF547FA6-13EB-4234-A88A-C550CD0A7A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF547FA6-13EB-4234-A88A-C550CD0A7A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF547FA6-13EB-4234-A88A-C550CD0A7A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF547FA6-13EB-4234-A88A-C550CD0A7A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA031CCD-5BE1-47BF-AA48-4A2EDCCB5F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA031CCD-5BE1-47BF-AA48-4A2EDCCB5F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA031CCD-5BE1-47BF-AA48-4A2EDCCB5F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA031CCD-5BE1-47BF-AA48-4A2EDCCB5F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAA0DD16-6949-43BC-96DC-2EBF95CBF0E6}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/hakangultekin
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BoostIK.API\\BoostIK.API.csproj
+		SccProjectName1 = BoostIK.API
+		SccLocalPath1 = BoostIK.API
+		SccProjectUniqueName2 = BoostIK.BLL\\BoostIK.BLL.csproj
+		SccProjectName2 = BoostIK.BLL
+		SccLocalPath2 = BoostIK.BLL
+		SccProjectUniqueName3 = BoostIK.CORE\\BoostIK.CORE.csproj
+		SccProjectName3 = BoostIK.CORE
+		SccLocalPath3 = BoostIK.CORE
+		SccProjectUniqueName4 = BoostIK.DAL\\BoostIK.DAL.csproj
+		SccProjectName4 = BoostIK.DAL
+		SccLocalPath4 = BoostIK.DAL
+		SccProjectUniqueName5 = BoostIK.UI\\BoostIK.UI.csproj
+		SccProjectName5 = BoostIK.UI
+		SccLocalPath5 = BoostIK.UI
+	EndGlobalSection
+EndGlobal
